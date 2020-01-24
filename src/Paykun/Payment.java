@@ -135,11 +135,6 @@ public class Payment {
             throw new ValidationException(errorDetail.get("message"), errorDetail.get("code"), null);
         }
 
-        if (Validator.VALIDATE_MOBILE_NO(customerMoNo)) {
-        	throw new ValidationException(ErrorCodes.INVALID_MOBILE_NO_STRING, ErrorCodes.INVALID_MOBILE_NO_CODE, null);
-            
-        }
-
         this.customerName     = customerName;
         this.customerEmail    = customerEmail;
         this.customerMoNo     = customerMoNo;
