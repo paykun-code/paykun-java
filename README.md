@@ -15,12 +15,7 @@ Note : Once you re-generate api key your old api key will stop working immediate
     2. Access Token (Please read 'How To Generate Access token and API Secret :')
     3. Encryption Key (Please read 'How To Generate Access token and API Secret :')
     
-# <h3>Set all the required credentials</h3>
-    1. From the extracted zip open the file 'paykunCheckout/views.py'
-    2. In PkPayment file fill all the required settings.
-    3. In 'main' replace all the dummy detail with real one provided from Paykun
-    4. Detail like order, customer, shipping, billing should be set by your own.
-    
+
 # <h3>How to run app</h3>
     1. Extract downloaded zip
     2. From command line navigate to the mysite directory in extracted directory
