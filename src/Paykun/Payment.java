@@ -67,6 +67,8 @@ public class Payment {
     private String udf_4;
     private String udf_5;
     
+    private String currency = "INR";
+    
     public Payment(String mid, String accessToken, String encKey, boolean isLive) throws ValidationException {
     	
     	/*if (Validator.VALIDATE_MERCHANT_ID(mid)) {
@@ -90,7 +92,7 @@ public class Payment {
         this.isPassedValidationForConstructor = true;
     } 
     
-    public void initOrder (String orderId, String purpose, Double amount, String successUrl, String failureUrl) throws ValidationException {
+    public void initOrder (String orderId, String purpose, Double amount, String successUrl, String failureUrl, String currency) throws ValidationException {
 
     	
         if (Validator.VALIDATE_ORDER_NUMBER(orderId)) {
@@ -114,6 +116,7 @@ public class Payment {
         this.amount       = amount;
         this.successUrl   = successUrl;
         this.failureUrl   = failureUrl;
+        this.currency = currency;
         this.isPassedValidationForInitOrder = true;
 
     }
@@ -134,6 +137,11 @@ public class Payment {
             errorDetail = Validator.VALIDATE_CUSTOMER_EMAIL(customerEmail);
             throw new ValidationException(errorDetail.get("message"), errorDetail.get("code"), null);
         }
+
+        /*if (Validator.VALIDATE_MOBILE_NO(customerMoNo)) {
+        	throw new ValidationException(ErrorCodes.INVALID_MOBILE_NO_STRING, ErrorCodes.INVALID_MOBILE_NO_CODE, null);
+            
+        }*/
 
         this.customerName     = customerName;
         this.customerEmail    = customerEmail;
@@ -164,7 +172,9 @@ public class Payment {
         this.billingAddressString    = addressString;
         this.isPassedValidationForBilling = true;
     }
-    
+    public void setCustomFields(String... args) {
+    	this.udf_1 = args[0];
+    }
     public void setCustomFields1(String cf1) {
     	this.udf_1 = cf1;
     }
@@ -217,7 +227,7 @@ public class Payment {
         	dataArray.put("udf_3", (this.udf_3 != null) ? this.udf_3 : "");
         	dataArray.put("udf_4", (this.udf_4 != null) ? this.udf_4 : "");
         	dataArray.put("udf_5", (this.udf_5 != null) ? this.udf_5 : "");
-            
+        	dataArray.put("currency", this.currency);
         	String encryptedData = this.encryptData(dataArray);
         	//System.out.println(encryptedData);
             return this.createForm(encryptedData);
